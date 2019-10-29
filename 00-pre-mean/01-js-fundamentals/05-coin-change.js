@@ -14,4 +14,4 @@ function coinChange(amount){
     }
     return changeBack
 }
-console.log(coinChange(94))
+console.log(coinChange(73))

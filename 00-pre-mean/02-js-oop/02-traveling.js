@@ -49,6 +49,7 @@ var player = {
 
 function playerMove(direction){
     var dir = direction.toLowerCase()
+    var currentLocation = player.location
     var newLocation;
     var possibleDir = ["north", "south", "west", "east"];
     for(var i = 0; i < possibleDir.length; i++){
@@ -69,6 +70,7 @@ function playerMove(direction){
                 player.location=newLocation;
                 console.log("You are now at "+newLocation.character+"'s house. ");
             } else {
+                player.location = currentLocation
                 console.log("You can not go that way!")
             }
         }
@@ -79,4 +81,5 @@ function playerMove(direction){
 playerMove('north');
 playerMove('north');
 playerMove('west');
+playerMove('north');
 console.log(player.location)

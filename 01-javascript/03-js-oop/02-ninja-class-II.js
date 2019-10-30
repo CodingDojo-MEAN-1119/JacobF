@@ -94,7 +94,7 @@ Ninja.prototype.kick = function(ninja){
 
 
 //OUTPUT//
-var ninja1 = new Ninja('Jake')
+const ninja1 = new Ninja('Jake')
 ninja1.train_strength(10)
 ninja1.train_speed(5)
 ninja1.showStrength()
@@ -102,7 +102,7 @@ ninja1.showSpeed()
 ninja1.sayHi()
 ninja1.drinkSake()
 ninja1.showStats()
-ninja2 = new Ninja('test')
+const ninja2 = new Ninja('test')
 ninja1.punch(ninja2)
 ninja2.showStats()
 ninja2.kick(ninja2)

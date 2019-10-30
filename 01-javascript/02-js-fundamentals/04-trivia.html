@@ -30,7 +30,7 @@
 <body>
     <div class="container-fluid">
         <button class= "btn btn-primary start-game-btn" type="button">Click to Start</button>
-        <div class="return-data-div">
+        <div class="return-data-div" style="display:none">
         </div>
     </div>
 
@@ -38,7 +38,8 @@
 <script>
 $('.start-game-btn').click(function(){
     $.get("https://opentdb.com/api.php?amount=10&type=multiple", displayData);
-    $('.start-game-btn').hide()
+    $('.start-game-btn').hide();
+    $('.return-data-div').slideToggle();
 });
 function displayData(data) {
     gameQuestions = data.results

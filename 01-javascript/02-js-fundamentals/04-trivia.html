@@ -1,1 +1,57 @@
 <!-- 2 hours -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Trivia Game</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<style>
+*, body{
+    padding: 0px;
+    margin: 0px;
+    background: black;
+}
+.container-fluid{
+    width: 700px;
+}
+.btn{
+    margin: 20px;
+}
+.return-data-div{
+    margin: 20px;
+    color: white;
+}
+</style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <button class= "btn btn-primary start-game-btn" type="button">Click to Start</button>
+        <div class="return-data-div">
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+$('.start-game-btn').click(function(){
+    $.get("https://opentdb.com/api.php?amount=10&type=multiple", displayData);
+    $('.start-game-btn').hide()
+});
+function displayData(data) {
+    gameQuestions = data.results
+    count = 0
+    for(var question of gameQuestions){
+        count += 1
+        $('.return-data-div').append("Question #" + count + "<br>")
+        $('.return-data-div').append("Question category:" + question.category + "<br>")
+        $('.return-data-div').append("Question:" + question.question + "<br>")
+        $('.return-data-div').append("Correct answer:" + question.correct_answer + "<br>")
+        $('.return-data-div').append("Incorrect answers:" + question.incorrect_answers + "<br>" + "<br>")
+    }
+}
+</script>
+</body>
+</html>

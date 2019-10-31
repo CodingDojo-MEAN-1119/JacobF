@@ -1,0 +1,17 @@
+h1{
+    color: grey;
+    text-align: center;
+    padding: 10px;
+}
+img{
+    width: 500px;
+    height: auto;
+    border: 2px solid black;
+}
+.container-fluid{
+    width: 700px;
+    padding: 20px;
+}
+.btn-primary{
+    margin-top: 15px;
+}

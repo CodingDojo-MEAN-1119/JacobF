@@ -43,12 +43,13 @@ const _ = {
       }
       return tempArr;
     },
-  }
-  
-  const array = [1, 2, 3, 4, 5, 6];
-  console.log(array);
-  _.map(array, function callback(x) { return x * 3; });
-  console.log(array);
-  console.log(_.reduce(array, function callback(x, memo) { return x - memo; }, 10));
-  console.log(_.find(array, function callback(x) { return x === 20; }));
-  console.log(_.filter(array, function(x) { return x % 2 == 0}));
+}
+
+// TESTS //
+const array = [1, 2, 3, 4, 5, 6];
+console.log(array);
+_.map(array, function callback(x) { return x * 3; });
+console.log(array);
+console.log(_.reduce(array, function callback(x, memo) { return x - memo; }, 10));
+console.log(_.find(array, function callback(x) { return x === 20; }));
+console.log(_.filter(array, function(x) { return x % 2 == 0}));

@@ -1,0 +1,14 @@
+img{
+    width: 500px;
+    height: auto;
+    border: 2px solid black;
+}
+h1{
+    color: grey;
+}
+h2{
+    color: darkcyan;
+}
+.btn-primary{
+    margin-top: 15px;
+}

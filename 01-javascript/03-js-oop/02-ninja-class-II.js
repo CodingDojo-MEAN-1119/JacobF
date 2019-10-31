@@ -39,11 +39,11 @@ Ninja.prototype.sayHi = function(){
 };
 
 Ninja.prototype.showStats = function(){
-    stats = {};
+    var stats = {};
     stats['Health'] = this.health
     stats['Strength'] = this.showStrength()
     stats['Speed'] = this.showSpeed()
-    console.log(`${this.name}'s stats:`)
+    console.log(`${this.name}'s Stats:`)
     console.log(stats)
     return this
 };

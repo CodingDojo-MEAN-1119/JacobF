@@ -93,7 +93,7 @@ class Player {
         return this
     }
 }
-  
+
 const deck1 = new Deck();
 const player1 = new Player("Jake")
 deck1.reset().shuffle().deal(player1).deal(player1).deal(player1)
@@ -102,4 +102,3 @@ player1.discardCard(2).showHand().takeCard(deck1).takeCard(deck1).showHand()
 this_card = player1.hand[2]
 console.log(this_card)
 this_card.show()
-

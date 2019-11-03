@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Epic Number Game</title>
+</head>
+<body>
+    <div id="count"></div>
+    <h1>Click The Epic Button To Increase The Counter</h1>
+    <form action="/" id="update_counter">
+        <input type="submit" value="Epic Button">
+    </form>
+    <br>
+    <form action="/" id="reset_counter">
+        <input type="submit" value="Reset">
+    </form>
+
+    <!-- SCRIPT -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type ="text/javascript">
+        $(document).ready(function (){
+    
+            var socket = io.connect();
+
+            socket.on('count', (data) => {
+                $('#count').html(data.count)
+            });
+
+            socket.on('update_count', (data) => {
+                $('#count').html(data.count)
+            });
+
+            $('#update_counter').submit(()=>{
+                socket.emit('count_one_up')
+            });
+
+            $('#reset_counter').submit(() => {
+                socket.emit('reset_counter')
+            });
+
+        });
+    </script>
+</body>
+</html>

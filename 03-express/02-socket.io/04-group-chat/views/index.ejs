@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chat Room</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+    <div id="container-fluid">
+        <!-- <h1>Users Online:</h1>
+        <h1 id="users-online-counter"></h1> -->
+        <div id="user-container">
+            <h2 id="user-exists"></h2>
+            <h1>Enter your name</h1>
+            <form id="username" class="form-group">
+                <input type="text" name="name" id="name" class="form-control">
+                <input type="submit" value="Go To Chat" class="btn btn-primary">
+            </form>
+        </div>
+        <div id="chat-container">
+            <div id="chat-content">
+
+            </div>
+            <form id="post-message" class="form-group">
+                <textarea name="message_content" id="message_content" cols="30" rows="2" class="form-control"></textarea>
+                <input type="submit" value="Send Message" class="btn btn-primary">
+            </form>
+        </div>
+    </div>
+    <!-- SCRIPT -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type ="text/javascript">
+        $(document).ready(function (){
+    
+            var socket = io.connect();
+            var current_user;
+
+            $('#username').submit((e)=>{
+                e.preventDefault()
+                const username = $('#name').val() 
+                socket.emit('new user', {username: username})
+            });
+            $('#post-message').submit((e) => {
+                e.preventDefault()
+                const message = $('#message_content').val()
+                socket.emit('new message', {message: message, posted_by: current_user})
+            });
+            socket.on('user exists', (data) => {
+                $('#user-exists').html(data.errormsg)
+                $('#user-exists').show()
+            });
+            socket.on('successful login', (data) => {
+                current_user = data.current_user
+                var messages = data.messages;
+                var messageThread = "";
+                $('#user-container').hide()
+                $('#chat-container').show()
+                for (var i = 0; i < messages.length; i++){
+                    messageThread += `<p><b>${messages[i].posted_by}</b><br>${messages[i].message}</p>`
+                }
+                $('#chat-content').append(messageThread)
+            });
+            socket.on('update messages', (data) => {
+                $('#chat-content').append(`<p><b>${data.posted_by}</b><br>${data.message}</p>`)
+            });
+            // socket.on('connect', () => {
+            //     socket.emit('connected user')
+            // });
+            // socket.on('disconnect', () => {
+            //     socket.emit('disconnected user', {user: current_user})
+            // });
+            // socket.on('update users online', (data) => {
+            //     $('#users-online-counter').html(data.online_users)
+            // });
+            // corresponding client side socket code being commented out //
+
+            
+        });
+    </script>
+</body>
+</html>

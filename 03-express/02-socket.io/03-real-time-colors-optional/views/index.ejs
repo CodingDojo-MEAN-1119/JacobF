@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Real Time Colors</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+    #background-container{
+        height: 950px;
+        padding: 50px;
+    }
+    .btn-primary{
+        padding: 50px;
+        background-color: white;
+        color: black;
+        border: none;
+        border-radius: 20px;
+    }
+    </style>
+</head>
+<body>
+    <div id="background-container">
+        <form action="/" class="form-group" id="bg_green">
+            <input type="submit" value="Green" class="btn btn-primary form-control col">
+        </form>
+        <form action="/" class="form-group" id="bg_blue">
+            <input type="submit" value="Blue" class="btn btn-primary form-control col">
+        </form>
+        <form action="/" class="form-group" id="bg_pink">
+            <input type="submit" value="Pink" class="btn btn-primary form-control col">
+        </form>
+    </div>
+
+    <!-- SCRIPT -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type ="text/javascript">
+        $(document).ready(function (){
+    
+            var socket = io.connect();
+
+            socket.on('color', (data) => {
+                $('#background-container').attr("style", `background-color:${data.color}`)
+            });
+
+            socket.on('update_color', (data) => {
+                $('#background-container').attr("style", `background-color:${data.color}`)
+            });
+
+            $('#bg_green').submit(()=>{
+                socket.emit('bg_green')
+            });
+
+            $('#bg_blue').submit(()=>{
+                socket.emit('bg_blue')
+            });
+
+            $('#bg_pink').submit(()=>{
+                socket.emit('bg_pink')
+            });
+
+        });
+    </script>
+</body>
+</html>

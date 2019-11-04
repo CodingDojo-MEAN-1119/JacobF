@@ -11,8 +11,8 @@
 </head>
 <body>
     <div id="container-fluid">
-        <!-- <h1>Users Online:</h1>
-        <h1 id="users-online-counter"></h1> -->
+        <h1>Users Online:</h1>
+        <h1 id="users-online-counter"></h1>
         <div id="user-container">
             <h2 id="user-exists"></h2>
             <h1>Enter your name</h1>
@@ -68,17 +68,9 @@
             socket.on('update messages', (data) => {
                 $('#chat-content').append(`<p><b>${data.posted_by}</b><br>${data.message}</p>`)
             });
-            // socket.on('connect', () => {
-            //     socket.emit('connected user')
-            // });
-            // socket.on('disconnect', () => {
-            //     socket.emit('disconnected user', {user: current_user})
-            // });
-            // socket.on('update users online', (data) => {
-            //     $('#users-online-counter').html(data.online_users)
-            // });
-            // corresponding client side socket code being commented out //
-
+            socket.on('update users online', (data) => {
+                $('#users-online-counter').html(data.online_users)
+            });
             
         });
     </script>

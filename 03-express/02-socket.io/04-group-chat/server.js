@@ -29,24 +29,24 @@ function isUser(user) {
     return false;
 }
 //SOCKETS FOR CHAT ROOM APP//
+var online_users = 0;
 io.on('connection', (socket) => {
 
-    // var online_users = 0;
+    online_users += 1;
+    io.emit('update users online', {online_users: online_users})
 
-    // socket.on('connected user', () => {
-    //     online_users += 1;
-    //     io.emit('update users online', {online_users: online_users})
-    // });
-    // socket.on('disconnected user', (data) => {
-    //     for(var i = 0; i<users.length;i++){
-    //         if(users[i] == data.user){
-    //             users.splice(i, 1)
-    //         }
-    //     }
-    //     online_users -= 1;
-    //     io.emit('update users online', {online_users: online_users})
-    // });
-    // couldn't figure out the above code, so it is commented out, it was a bonus personal goal anyways//
+    socket.on('disconnect', (data) => {
+        // console.log(data)
+        // console.log(socket.id)
+        // for(var i = 0; i<users.length;i++){
+        //     if(users[i] == data.user){
+        //         users.splice(i, 1)
+        //     }
+        // }
+        //The beginnings of a disconnect feature that removes socket's username from the array of users//
+        online_users -= 1;
+        io.emit('update users online', {online_users: online_users})
+    });
     
     socket.on('new user', (data) => {
         if(isUser(data.username)){
@@ -54,6 +54,11 @@ io.on('connection', (socket) => {
             console.log(`${data.username} already exists`)
         }
         else {
+            // const user = {
+            //     username: data.username,
+            //     id: socket.id
+            // }
+            // users.push(user)
             users.push(data.username)
             socket.emit('successful login', {current_user: data.username, messages: messages})
             console.log(`${data.username} has logged in successfully`)

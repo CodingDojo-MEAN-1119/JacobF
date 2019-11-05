@@ -67,13 +67,9 @@ app.post('/user/:username/edit/confirm', (request,response) => {
             this_user.username = request.body.username
             this_user.lucky_number = request.body.lucky_number
             this_user.fav_language = request.body.fav_language
-            this_user.save()
-            response.redirect('/')
+            return this_user.save()
+            .then(response.redirect(`/user/${this_user.username}`))
         })
-        // .then(result=>{
-        //     response.redirect(`/user/${username}`)
-        // })
-        //This doesn't load the updated username in time to load the user page again//
         .catch(err=>{
             console.log(err)
         });

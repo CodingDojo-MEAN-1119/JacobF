@@ -1,0 +1,61 @@
+// 1
+use intro_to_mongodb_db
+
+// 2
+db.createCollection("students")
+
+// 3/4
+db.students.insert({name:"Jake", home_state: "California", lucky_number: 7, birthday: {month: 05, day: 06, year: 1999}})
+db.students.insert({name:"Todd", home_state: "Michigan", lucky_number: 17, birthday: {month: 11, day: 23, year: 2000}})
+db.students.insert({name:"Jeff", home_state: "Oregon", lucky_number: 77, birthday: {month: 03, day: 15, year: 1995}})
+db.students.insert({name:"Bob", home_state: "Washington", lucky_number: 37, birthday: {month: 12, day: 09, year: 1989}})
+db.students.insert({name:"Bill", home_state: "Arizona", lucky_number: 27, birthday: {month: 05, day: 02, year: 2003}})
+
+// 5
+db.students.find()
+
+// 6 
+db.students.find({$or: [{home_state:"California"}, {home_state:"Washington"}]})
+
+// 7
+db.students.find({lucky_number: {$gt: 3}})
+db.students.find({lucky_number: {$lte: 10}})
+db.students.find({$and:[{lucky_number:{$gte:1}}, {lucky_number:{$lte:9}}]})
+
+// 8
+db.students.update({},{$set: {interests:['coding', 'brunch', 'MongoDB']}})
+
+// 9
+db.students.update({name:"Jake"}, {$push: {interests: 'video games'}})
+db.students.update({name:"Todd"}, {$push: {interests: 'lawn mowers'}})
+db.students.update({name:"Bill"}, {$push: {interests: 'martial arts'}})
+
+// 10
+db.students.update({name:"Jake"}, {$push: {interests: 'taxes'}})
+
+// 11
+db.students.update({name:"Jake"}, {$pull: {interests: 'taxes'}})
+
+// 12
+db.students.remove({home_state:"California"})
+
+// 13
+db.students.remove({name:"Todd"})
+
+// 14
+db.students.remove({lucky_number:{$gt:5}}, true)
+
+// 15
+db.students.update({}, {$set: {number_of_belts:0}}, {multi:true})
+
+// 16
+db.students.update({home_state:"Washington"}, {$inc: {number_of_belts: 1}})
+
+// 17
+db.students.update({}, {$rename: {number_of_belts: 'belts_earned'}}, {multi:true})
+
+// 18
+db.students.update({}, {$unset: {lucky_number:""}}, {multi:true})
+
+// 19
+db.students.update({}, {$currentDate: {updated_on: { $type: "date" }}}, {multi:true})

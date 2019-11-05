@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <h1 class="nav-brand bg-dark">Message Board</h1>        
+        <div class="collapse navbar-collapse bg-dark" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto bg-dark">
+                <li class="bg-dark"> 
+                    <span class="fas fa-home bg-dark"></span>
+                </li>
+                <li class="nav-item active bg-dark">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <h1>Message Board</h1>
+       <div class="form-container">
+            <form action="/" method="POST" class="form-group">
+                <h1>Submit New Message</h1>
+                <h2>Your Name</h2>
+                <input type="text" name="posted_by" id="posted_by" class="form-control">
+                <br>
+                <h2>Message</h2>
+                <textarea name="message" id="message" cols="30" rows="3" class="form-control"></textarea>
+                <input type="submit" value="Send" class="btn btn-primary">
+            </form>
+            <% if(messages.post_message) { %>
+                <% for (var message of messages.post_message) { %>
+                 <h3><%= message %></h3>
+                <% } %>
+            <% } %>
+       </div>
+       <% if (all_messages.length > 0) { %>
+       <div class="messages-container">
+           <h1>All Messages</h1>
+           <% for (var message of all_messages) { %>
+            <div class="message">
+                <h2><%= message.posted_by %></h2>
+                <h3><%= message.createdAt.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) %><br><%= message.createdAt.toLocaleTimeString('en-US', {hour: '2-digit', minute:'2-digit'}) %></h3>
+                <p><%= message.message %></p>
+                <button type="toggle" class="show_comments btn btn-secondary">Comments</button>
+                <div class="comment-container">
+                    <% if (message.comments.length > 0) { %>
+                        <h3>Comments</h3>
+                        <% for (var comment of message.comments) { %>
+                            <h2><%= comment.posted_by %></h2>
+                            <h3><%= comment.createdAt.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) %><br><%= comment.createdAt.toLocaleTimeString('en-US', {hour: '2-digit', minute:'2-digit'}) %></h3>
+                            <p><%= comment.comment %></p>
+                        <% } %>
+                    <% } %>
+                    <form action="/<%= message.id %>/comment" method="POST" class="form-group">
+                        <h2>Your Name</h2>
+                        <input type="text" name="posted_by" id="posted_by" class="form-control">
+                        <br>
+                        <h2>Comment</h2>
+                        <textarea name="comment" id="comment" cols="30" rows="3" class="form-control"></textarea>
+                        <input type="submit" value="Comment" class="btn btn-primary">
+                    </form>
+                </div>
+            </div>
+           <% } %>
+       </div>
+       <% } %>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        $('.show_comments').click(function(){
+            $('.comment-container').slideToggle()
+        });
+    });
+    </script>
+</body>
+</html>

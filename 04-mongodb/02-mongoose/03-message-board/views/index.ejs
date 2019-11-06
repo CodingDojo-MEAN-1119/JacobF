@@ -45,6 +45,12 @@
        <% if (all_messages.length > 0) { %>
        <div class="messages-container">
            <h1>All Messages</h1>
+           <% if(messages.post_comment) { %>
+                <h2>Your comment was not posted!</h2>
+                <% for (var message of messages.post_comment) { %>
+                <h3><%= message %></h3>
+                <% } %>
+            <% } %>
            <% for (var message of all_messages) { %>
             <div class="message">
                 <h2><%= message.posted_by %></h2>

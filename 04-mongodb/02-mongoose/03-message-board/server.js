@@ -30,7 +30,7 @@ const CommentSchema = new mongoose.Schema({
     },
     comment: {
         type: String,
-        required: [true, "comments cannot be blank"],
+        required: [true, "Comments cannot be blank"],
         minlength: [1, "You cannot post blank comments"],
         maxlength: [255, "Max length of comments are 255 characters"],
         trim: true
@@ -68,7 +68,7 @@ app.get('/', (request, response) => {
 });
 app.post('/', (request, response) => {
     Message.create(request.body)
-        .then(response.redirect('/'))
+        .then(()=>response.redirect('/'))
         .catch(err=>{
             console.log(err)
             for (var key in err.errors) {
@@ -83,9 +83,13 @@ app.post('/:message_id/comment', (request, response) => {
         .then(this_message=>{
             this_message.comments.push(request.body)
             return this_message.save()
-            .then(response.redirect('/'))
+            .then(()=>response.redirect('/'))
         })
         .catch(err=>{
             console.log(err)
+            for (var key in err.errors) {
+                request.flash('post_comment', err.errors[key].message);
+            }
+            response.redirect('/')
         });
 }); 

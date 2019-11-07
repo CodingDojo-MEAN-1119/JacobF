@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%= this_user.username %></title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <h1 class="nav-brand bg-dark">Dashboard App</h1>        
+        <div class="collapse navbar-collapse bg-dark" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto bg-dark">
+                <li class="bg-dark"> 
+                    <span class="fas fa-home bg-dark"></span>
+                </li>
+                <li class="nav-item active bg-dark">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="bg-dark"> 
+                    <span class="fas fa-plus bg-dark"></span>
+                </li>
+                <li class="nav-item active bg-dark">
+                    <a class="nav-link" href="/user/add">Add User</a>   
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="users-list-container">
+            <div class="user-container">
+                <h2>ID: <%= this_user.id %></h2>
+                <h2><a href="/user/<%= this_user.username %>">Username: <%= this_user.username %></a></h2>
+                <h3>Lucky Number: <%= this_user.lucky_number %></h3>
+                <h3>Favorite Language: <%= this_user.fav_language %></h3>
+                <a href="/user/<%= this_user.username %>/edit" class="col profile-text-smallfont">Edit User</a>
+                <a href="/user/<%= this_user.username %>/delete" class="col profile-text-smallfont">Delete User</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

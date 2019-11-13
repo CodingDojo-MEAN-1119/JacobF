@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from './services/http.service';
 
+import { Task } from './models/task';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,19 +10,33 @@ import { HttpService } from './services/http.service';
 })
 export class AppComponent implements OnInit {
   title = 'restfulTaskAPI';
+  tasks: Task[] = [];
+  task: Task;
+
   constructor(private httpService: HttpService) {}
-  tasks = [];
+
 
   ngOnInit() {
     this.getTasksFromService();
   }
 
   getTasksFromService() {
-    let observable = this.httpService.getTasks();
-    observable.subscribe(data => {
-      console.log('Got our tasks!', data);
-      this.tasks = data['tasks'];
+    this.httpService.getTasks()
+      .subscribe(allTasks => {
+      console.log('Got our tasks!', allTasks);
+      this.tasks = allTasks;
     });
+  }
+
+  getThisTask(taskId: string) {
+    this.task = this.tasks.find(task => task._id === taskId);
+    if (!this.task) {
+      this.httpService.getThisTask(taskId)
+        .subscribe(thisTask => {
+          console.log('Got this task!', thisTask);
+          this.task = thisTask;
+        });
+    }
   }
 
 }

@@ -1,3 +1,17 @@
+<style>
+.task-container{
+  border: 2px solid black;
+  padding: 20px;
+  margin: 10px;
+}
+</style>
+
 <div class="tasks-container">
-  <p *ngIf="tasks">IDK</p>
+  <h1 *ngIf="tasks">All Tasks</h1>
+  <div class="task-container" *ngFor="let task of tasks">
+    <h2>Task ID: {{task._id}}</h2>
+    <h2>Task Title: {{task.title}}</h2>
+    <h3>Task Description: {{task.description}}</h3>
+    <h3>Task Status(true/false): {{task.completed}}</h3>
+  </div>
 </div>

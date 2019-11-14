@@ -17,7 +17,6 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit() {
-    this.getTasksFromService();
   }
 
   getTasksFromService() {
@@ -28,15 +27,17 @@ export class AppComponent implements OnInit {
     });
   }
 
-  getThisTask(taskId: string) {
-    this.task = this.tasks.find(task => task._id === taskId);
-    if (!this.task) {
-      this.httpService.getThisTask(taskId)
-        .subscribe(thisTask => {
-          console.log('Got this task!', thisTask);
-          this.task = thisTask;
-        });
-    }
+  getThisTaskFromService(taskId: string) {
+    this.httpService.getThisTask(taskId)
+      .subscribe(thisTask => {
+        console.log('Got this task!', thisTask);
+        this.task = thisTask;
+    });
+  }
+
+  hideAllTasks() {
+    this.tasks = [];
+    this.task = null;
   }
 
 }

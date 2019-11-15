@@ -1,0 +1,25 @@
+<style>
+  .task-container{
+    border: 2px solid black;
+    padding: 20px;
+    margin: 10px;
+  }
+  .form-container{
+    padding: 20px;
+  }
+  .task-details-container, .task-edit-form{
+    display: inline-block;
+    vertical-align: top;
+    width: 45%;
+  }
+</style>
+<!-- task list -->
+<div class="tasks-container" *ngIf="tasks.length > 0">
+  <h1>All Tasks</h1>
+  <div class="task-container" *ngFor="let task of tasks">
+    <h3>Task ID: {{task._id}}</h3>
+    <button (click)="selectTask(task)">Show Details</button>
+  </div>
+</div>
+
+<app-task-details *ngIf="task" (onDelete)="deleteTask()" (onUpdate)="updateTask($event)" [task]="task"></app-task-details>

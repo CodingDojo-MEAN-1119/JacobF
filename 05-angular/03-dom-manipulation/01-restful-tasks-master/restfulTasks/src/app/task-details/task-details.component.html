@@ -1,0 +1,44 @@
+<style>
+  .task-container{
+    border: 2px solid black;
+    padding: 20px;
+    margin: 10px;
+  }
+  .form-container{
+    padding: 20px;
+  }
+  .task-details-container, .task-edit-form{
+    display: inline-block;
+    vertical-align: top;
+    width: 45%;
+  }
+</style>
+<!-- task details -->
+<div class="task-details-container">
+  <button (click)="hideDetails()">Hide Details</button>
+  <h1>Task Details:</h1>
+  <h2>Task ID: {{task._id}}</h2>
+  <h2>Task Title: {{task.title}}</h2>
+  <h3>Task Description: {{task.description}}</h3>
+  <h3>Task Status(true/false): {{task.completed}}</h3>
+  <button (click)="showEditForm()">Edit Task</button>
+  <button (click)="deleteTask(task._id)">Delete Task</button>
+</div>
+<div class="task-edit-form" *ngIf="editForm">
+  <button (click)="closeEditForm()">Cancel Edit</button>
+  <h1>Edit Task</h1>
+  <form (submit)="updateTask(editForm)" #editForm = "ngForm">
+    <h3>ID</h3>
+    <p>{{task._id}}</p>
+    <h3>Title</h3>
+    <input type="text" name="title" [ngModel]="task.title"><br>
+    <h3>Description</h3>
+    <textarea type="text" name="description" [ngModel]="task.description"></textarea><br>
+    <h3>Status</h3>
+    <select name="completed" [ngModel]="task.completed">
+      <option value="true">Completed</option>
+      <option value="false">Incomplete</option>
+    </select><br>
+    <input type="submit" value="Update">
+  </form>
+</div>

@@ -19,7 +19,7 @@ export class TaskListComponent implements OnInit {
 
   selectTask(task) {
     this.task = task;
-    console.log(task)
+    console.log(task);
   }
 
   deleteTask() {

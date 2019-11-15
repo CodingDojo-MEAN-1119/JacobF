@@ -31,9 +31,12 @@ export class AppComponent implements OnInit {
   }
 
   onSubmit(event: Event) {
-    event.preventDefault();
+    event.stopPropagation();
     this.httpService.createNewCake(this.newCake)
-      .subscribe(() => this.getAllCakesFromService());
+      .subscribe(() => {
+        this.getAllCakesFromService();
+        this.newCake = { baker: '', imageUrl: '' };
+      });
   }
 
 }

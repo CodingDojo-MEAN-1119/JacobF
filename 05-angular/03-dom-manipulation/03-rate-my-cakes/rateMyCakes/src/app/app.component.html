@@ -12,11 +12,22 @@
     </form>
   </div>
   <div class="cakes-container" *ngIf="cakes.length > 0">
-    <h1>All Cakes</h1>
+    <h2>All Cakes</h2>
     <div class="cake" *ngFor="let cake of cakes">
       <h1><img src="{{cake.imageUrl}}" alt="cake {{cake._id}}"></h1>
-      <h3>Baked By:</h3>
-      <h2>{{cake.baker}}</h2>
+      <form class="cake-review-form form-group">
+        <h3>Star Rating</h3>
+        <select name="rating" class="form-control">
+          <option value="5">5</option>
+          <option value="4">4</option>
+          <option value="3">3</option>
+          <option value="2">2</option>
+          <option value="1">1</option>
+        </select>
+        <h3>Comment</h3>
+        <textarea name="" cols="30" rows="2" class="form-control"></textarea>
+        <input type="submit" value="Submit Review" class="btn btn-secondary">
+      </form>
     </div>
   </div>
 </div>

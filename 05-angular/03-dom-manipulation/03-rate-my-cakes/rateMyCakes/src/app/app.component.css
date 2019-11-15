@@ -3,7 +3,17 @@ img{
 }
 .form-container, .cakes-container{
   display: inline-block;
-  width: 45%;
   padding: 20px;
   vertical-align: top;
+}
+.form-container{
+  width: 40%;
+}
+.cakes-container{
+  width: 60%;
+  height: 400px;
+  overflow: scroll;
+}
+textarea{
+  resize: none;
 }

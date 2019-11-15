@@ -1,0 +1,22 @@
+<div class="container-fluid">
+  <div class="form-container">
+    <h1>Rate my cakes</h1>
+    <h2>Submit a cake to be rated</h2>
+    <form (submit)="onSubmit($event)" class="form-group" #cakeForm = "ngForm">
+      <h3>Baker name:</h3>
+      <input type="text" name="baker" [(ngModel)]="newCake.baker" class="form-control">
+      <h3>Image url:</h3>
+      <input type="text" name="imageUrl" [(ngModel)]="newCake.imageUrl" class="form-control">
+      <br>
+      <input type="submit" value="Add Cake" class="btn btn-primary">
+    </form>
+  </div>
+  <div class="cakes-container" *ngIf="cakes.length > 0">
+    <h1>All Cakes</h1>
+    <div class="cake" *ngFor="let cake of cakes">
+      <h1><img src="{{cake.imageUrl}}" alt="cake {{cake._id}}"></h1>
+      <h3>Baked By:</h3>
+      <h2>{{cake.baker}}</h2>
+    </div>
+  </div>
+</div>

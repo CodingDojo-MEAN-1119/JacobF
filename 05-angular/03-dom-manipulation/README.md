@@ -5,4 +5,4 @@
 3. Ninja Gold (Group Activity -- Self Assigned) -- (completed)
 4. Restful Tasks CRUD -- (completed)
 5. Restful Tasks Nested -- (completed)
-6. Rate My Cakes
+6. Rate My Cakes -- (completed)

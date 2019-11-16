@@ -1,0 +1,33 @@
+<style>
+.details-container{
+  margin-top: 25px;
+  padding: 50px;
+}
+h3{
+  margin-top: 10px;
+}
+.details-container, .reviews-container{
+  display: inline-block;
+  vertical-align: top;
+  width: 45%;
+}
+.reviews-container{
+  height: 300px;
+  overflow: scroll;
+}
+</style>
+<div class="container-fluid">
+  <h1>Cake Details</h1>
+  <div class="details-container">
+    <img src="{{cake.imageUrl}}" alt="cake {{cake._id}}">
+    <h3>Baked By: {{cake.baker}}</h3>
+  </div>
+  <div class="reviews-container" *ngIf="reviews.length > 0">
+    <h2>Reviews</h2>
+    <h1>Average Rating: {{reviewAverage}}</h1>
+    <div *ngFor="let review of reviews">
+      <h3>Rating: {{review.starRating}}</h3>
+      <h3>- {{review.comment}}</h3>
+    </div>
+  </div>
+</div>

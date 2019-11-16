@@ -11,3 +11,5 @@ app.use(bodyParser.json());
 // SERVER-SIDE SCRIPT + MONGOOSE //
 require('./server/config/mongoose.js')
 require('./server/routes/cake.routes')(app)
+require('./server/routes/review.routes')(app)
+

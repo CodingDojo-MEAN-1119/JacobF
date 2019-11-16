@@ -14,10 +14,10 @@
   <div class="cakes-container" *ngIf="cakes.length > 0">
     <h2>All Cakes</h2>
     <div class="cake" *ngFor="let cake of cakes">
-      <h1><img src="{{cake.imageUrl}}" alt="cake {{cake._id}}"></h1>
-      <form class="cake-review-form form-group">
+      <h1><img (click)="getCakeDetails(cake._id)" src="{{cake.imageUrl}}" alt="cake {{cake._id}}"></h1>
+      <form (submit)="onReviewSubmit($event, cake._id)" class="cake-review-form form-group">
         <h3>Star Rating</h3>
-        <select name="rating" class="form-control">
+        <select name="starRating" class="form-control" [(ngModel)]="newReview.starRating">
           <option value="5">5</option>
           <option value="4">4</option>
           <option value="3">3</option>
@@ -25,9 +25,11 @@
           <option value="1">1</option>
         </select>
         <h3>Comment</h3>
-        <textarea name="" cols="30" rows="2" class="form-control"></textarea>
+        <textarea name="comment" cols="30" rows="2" class="form-control" [(ngModel)]="newReview.comment"></textarea>
         <input type="submit" value="Submit Review" class="btn btn-secondary">
       </form>
     </div>
   </div>
 </div>
+
+<app-cake-details *ngIf="cake" [cake]="cake" [reviews]="reviews" [reviewAverage]="reviewAverage"></app-cake-details>
